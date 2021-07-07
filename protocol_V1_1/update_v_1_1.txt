@@ -1,0 +1,16 @@
+Detailed changes over publication version:
+
+1. Switched to NEB beads due to lower price. System seems to work at same volume beads despite NEB's beads having a reduced mg/mL of beads.
+
+2. Decreased reaction volume to enable 96-well depletions.
+
+3. Changed buffer system to 1x SSC rather than MyOne reccomended "bind and wash" buffer. 1x SSC has much lower salt which should improve stringency to rRNA binding. The main reason for the change, however, was to enable direct loading of supernatent from the beads to reverse transcription reactions where high salt concentrations may be problematic. I've currently verified this works with Maxima Minus H Reverse Transcriptase (Thermo), but it should work with other RTs as well. Note that more probes will come down without the purification in between - so if your RT enzyme produces reads from ssDNA, this may lead to probe reads (particularly if you have few or no downstream size selections during library prep).
+
+4. Decreased input RNA to the 25-100 ng range. For the library preps I am using (see template switch libraries in endoribonucmap repo), this is still adequate input to generate robust RNA-Seq libraries.
+
+5. Given decreased volume, RNA input, and cost of reagents, I increased the default ratio of probe : total RNA and bead : probe. This should stabilize or improve depletion in many cases. These altered ratios are present in the new depletion calculator default settings.
+
+6. Altered depletion calculator to enable user input of multiple samples at a time to facilitate use of master mix for removal reactions.
+
+7. Added an alternative purification option using magnetic beads.
+
