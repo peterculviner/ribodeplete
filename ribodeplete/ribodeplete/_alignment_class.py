@@ -7,7 +7,6 @@ import matplotlib.colors as colors
 from matplotlib.colorbar import ColorbarBase as cbb
 import seaborn as sns
 from Bio.Seq import Seq
-from Bio.Alphabet.IUPAC import unambiguous_dna, unambiguous_rna
 
 class AlignedrRNA():
     def readfasta(self, fasta_path):
@@ -102,7 +101,7 @@ class AlignedrRNA():
             Tms = probe.getTm()
             if np.any(np.isnan(Tms)): # pass over any probes which have an undefined Tm
                 continue
-            row = [probe.left, probe.length, str(Seq(probe.sequence,alphabet=unambiguous_dna).reverse_complement()),
+            row = [probe.left, probe.length, str(Seq(probe.sequence).reverse_complement()),
                    np.min(Tms), np.max(Tms)] + Tms
             data.append(row)
         pd.DataFrame(data=data, columns=columns).to_csv(filepath)

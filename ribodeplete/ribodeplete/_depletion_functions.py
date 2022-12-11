@@ -3,7 +3,6 @@ import numpy as np
 from scipy.stats import norm
 from Bio.SeqUtils.MeltingTemp import Tm_NN as tm
 from Bio.SeqUtils import MeltingTemp as mt
-from Bio.Alphabet.IUPAC import unambiguous_dna, unambiguous_rna
 from Bio.Seq import Seq
 from Bio import SeqIO
 import os,subprocess
@@ -188,8 +187,8 @@ def NNTm(oligo_seq, rna_seq, melting_table = mt.R_DNA_NN1):
     # oligo_seq also given in coding and 5'->3' --> mapped to c_seq in tm function
     if '-' in rna_seq: # if a gap is present, return a np.nan Tm
         return np.nan
-    rna_seq = Seq(rna_seq,alphabet=unambiguous_rna)
-    oligo_seq = Seq(oligo_seq,alphabet=unambiguous_dna).complement()
+    rna_seq = Seq(rna_seq)
+    oligo_seq = Seq(oligo_seq).complement()
     try:
         return tm(seq=rna_seq, c_seq=oligo_seq, nn_table=melting_table)
     except ValueError: # if multiple mismatches in a row, this will happen
